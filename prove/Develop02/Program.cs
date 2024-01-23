@@ -1,10 +1,16 @@
 using System;
 using System.IO;
 
+// Exceeding the requirements
+
 class Program
 {
     static void Main(string[] args)
     {
+        PromptGenerator promptGenerator = new PromptGenerator();
+        promptGenerator.LoadPrompts();
+        Console.WriteLine("Welcome to the Journal Program!:");
+
         Journal journal = new Journal();
         bool running = true;
         while (running)
@@ -24,7 +30,7 @@ class Program
                     // code block
                     Entry entry = new Entry();
                     entry._date = DateTime.Now;
-                    entry._prompt = "If I had one thing I could do over today, what would it be?";
+                    entry._prompt = promptGenerator.RandomPrompt();
                     Console.WriteLine(entry._prompt);
                     Console.Write("> ");
                     entry._response = Console.ReadLine();

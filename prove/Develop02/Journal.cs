@@ -20,9 +20,8 @@ public class Journal
 	{
 		Console.WriteLine("What is the filename?");
 		this.fileName = Console.ReadLine();
+		this._entries = new List<Entry>();
 		string[] lines = System.IO.File.ReadAllLines(this.fileName);
-
-
 		int count = 0;
 		for (int i = 0; i < lines.Length; i++)
 		{
