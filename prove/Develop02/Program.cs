@@ -1,7 +1,13 @@
 using System;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 // Exceeding the requirements
+// catch errors if the user types a filename that is not found during loading
+// save / load as JSON files
+// csv file
 
 class Program
 {
@@ -11,7 +17,27 @@ class Program
         promptGenerator.LoadPrompts();
         Console.WriteLine("Welcome to the Journal Program!:");
 
+
+        Entry entry1 = new Entry
+        {
+			Date = DateTime.UtcNow,
+			Prompt = "This is a test",
+			Response = "This is a test",
+		};
+        Entry entry2 = new Entry
+        {
+			Date = DateTime.UtcNow,
+			Prompt = "This is a test2",
+			Response = "This is a test2",
+		};
+
         Journal journal = new Journal();
+        journal.Entries.Add(entry1);
+        journal.Entries.Add(entry2);
+        // string jsonString = JsonSerializer.Serialize(journal.Entries);
+
+
+
         bool running = true;
         while (running)
         {
@@ -29,11 +55,11 @@ class Program
                 case 1:
                     // code block
                     Entry entry = new Entry();
-                    entry._date = DateTime.Now;
-                    entry._prompt = promptGenerator.RandomPrompt();
-                    Console.WriteLine(entry._prompt);
+                    entry.Date = DateTime.Now;
+                    entry.Prompt = promptGenerator.RandomPrompt();
+                    Console.WriteLine(entry.Prompt);
                     Console.Write("> ");
-                    entry._response = Console.ReadLine();
+                    entry.Response = Console.ReadLine();
                     journal.AddEntry(entry);
                     break;
                 case 2:
@@ -51,6 +77,15 @@ class Program
                 case 5:
                     // code block
                     running = false;
+                    break;
+                case 6:
+                    // code block
+                    journal.SaveJson();
+                    break;
+                case 7:
+                    // code block
+                    journal.SaveJson2();
+                    
                     break;
                 default:
                     // code block

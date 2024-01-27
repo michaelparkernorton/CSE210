@@ -1,13 +1,13 @@
 public class Entry
 {
-    public DateTime _date;
-    public string _prompt;
-    public string _response;
+    public DateTime Date { get; set; }
+    public string Prompt { get; set; }
+    public string Response { get; set; }
     
     public void Display()
     {
-        Console.WriteLine($"Date: {_date:d} - Prompt: {_prompt}");
-        Console.WriteLine($"{_response}");
+        Console.WriteLine($"Date: {Date:d} - Prompt: {Prompt}");
+        Console.WriteLine($"{Response}");
         Console.WriteLine("");
     }
 }
