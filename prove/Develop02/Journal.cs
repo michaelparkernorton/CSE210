@@ -1,5 +1,4 @@
 using System.Text.Json;
-// https://www.youtube.com/watch?v=w6M-Bj-tfv4
 public class Journal
 {
 	public List<Entry> _entries = new List<Entry>();
@@ -12,8 +11,14 @@ public class Journal
 			entry.Display();
 		}
 	}
-	public void AddEntry(Entry entry)
+	public void Write(PromptGenerator promptGenerator)
 	{
+		Entry entry = new Entry();
+		entry._date = DateTime.Now;
+		entry._prompt = promptGenerator.RandomPrompt();
+		Console.WriteLine(entry._prompt);
+		Console.Write("> ");
+		entry._response = Console.ReadLine();
 		this._entries.Add(entry);
 	}
 
