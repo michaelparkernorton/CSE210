@@ -17,26 +17,7 @@ class Program
         promptGenerator.LoadPrompts();
         Console.WriteLine("Welcome to the Journal Program!:");
 
-
-        Entry entry1 = new Entry
-        {
-			Date = DateTime.UtcNow,
-			Prompt = "This is a test",
-			Response = "This is a test",
-		};
-        Entry entry2 = new Entry
-        {
-			Date = DateTime.UtcNow,
-			Prompt = "This is a test2",
-			Response = "This is a test2",
-		};
-
         Journal journal = new Journal();
-        journal.Entries.Add(entry1);
-        journal.Entries.Add(entry2);
-        // string jsonString = JsonSerializer.Serialize(journal.Entries);
-
-
 
         bool running = true;
         while (running)
@@ -77,15 +58,6 @@ class Program
                 case 5:
                     // code block
                     running = false;
-                    break;
-                case 6:
-                    // code block
-                    journal.SaveJson();
-                    break;
-                case 7:
-                    // code block
-                    journal.SaveJson2();
-                    
                     break;
                 default:
                     // code block

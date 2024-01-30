@@ -1,1 +1,17 @@
-[{"Date":"2024-01-26T01:02:46.7347194Z","Prompt":"This is a test","Response":"This is a test"},{"Date":"2024-01-26T01:02:46.7349232Z","Prompt":"This is a test2","Response":"This is a test2"}]
+[
+  {
+    "Date": "2024-01-30T08:10:57.5961574-03:00",
+    "Prompt": "Who was the most interesting person I interacted with today?",
+    "Response": "Ricardo. He brought home the pao-er."
+  },
+  {
+    "Date": "2024-01-30T08:11:27.4012507-03:00",
+    "Prompt": "If I didn\u0027t have to worry about money what would I have done today?",
+    "Response": "I would probably be still in bed."
+  },
+  {
+    "Date": "2024-01-30T08:13:12.0117256-03:00",
+    "Prompt": "Who was the most interesting person I interacted with today?",
+    "Response": "I already told you!"
+  }
+]
