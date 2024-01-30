@@ -36,11 +36,11 @@ class Program
                 case 1:
                     // code block
                     Entry entry = new Entry();
-                    entry.Date = DateTime.Now;
-                    entry.Prompt = promptGenerator.RandomPrompt();
-                    Console.WriteLine(entry.Prompt);
+                    entry._date = DateTime.Now;
+                    entry._prompt = promptGenerator.RandomPrompt();
+                    Console.WriteLine(entry._prompt);
                     Console.Write("> ");
-                    entry.Response = Console.ReadLine();
+                    entry._response = Console.ReadLine();
                     journal.AddEntry(entry);
                     break;
                 case 2:
