@@ -5,9 +5,8 @@ using System.Text.Json.Serialization;
 
 
 // Exceeding the requirements
-// catch errors if the user types a filename that is not found during loading
-// save / load as JSON files
-// csv file
+// This project exceeds the requirements by updating the save/load features to
+// save files in json format and to load them as well using the JsonSerialier
 
 class Program
 {
