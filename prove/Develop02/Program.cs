@@ -63,9 +63,6 @@ class Program
                     // code block
                     break;
             }
-
-            Console.WriteLine("");
         }
-
     }
 }

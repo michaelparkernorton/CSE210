@@ -29,12 +29,9 @@ public class Journal
 	{
 		var options = new JsonSerializerOptions();
 		options.WriteIndented = true;
-    string jsonString = JsonSerializer.Serialize<List<Entry>>(this._entries, options);
-    Console.WriteLine(jsonString);
-
+		string jsonString = JsonSerializer.Serialize<List<Entry>>(this._entries, options);
 		Console.WriteLine("What is the filename?");
-    this._fileName = Console.ReadLine();
-
+		this._fileName = Console.ReadLine();
 		File.WriteAllText(this._fileName, jsonString);
 	}
 }
