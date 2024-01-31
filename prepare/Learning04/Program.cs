@@ -1,9 +1,13 @@
 using System;
+using System.Collections;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Learning04 World!");
+        string s = "Hello";
+        int x = s.Length;
+        int y = s.IndexOf("l");
+        Console.Write(x%y);
     }
 }

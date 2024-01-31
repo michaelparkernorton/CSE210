@@ -5,6 +5,7 @@ public class Fraction
 	private int _top;
 	private int _bottom;
 
+// Left off on step 4
 	public Fraction()
 	{
 		_top = 1;
@@ -45,7 +46,7 @@ public class Fraction
 
 	public string GetFractionString()
 	{
-		return "";
+		return $"{_top}/{_bottom}";
 	}
 
 	public double GetDecimalValue()
