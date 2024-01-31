@@ -51,6 +51,6 @@ public class Fraction
 
 	public double GetDecimalValue()
 	{
-		return 0;
+		return (double)_top/_bottom;
 	}
 }
