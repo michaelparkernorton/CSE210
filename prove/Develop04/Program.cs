@@ -1,9 +1,10 @@
 using System;
-
+using System.Text.Json;
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop04 World!");
+        var scriptureJson = File.ReadAllText("scripture.json");
+        Scripture scripture = JsonSerializer.Deserialize<Scripture>(scriptureJson);
     }
 }
