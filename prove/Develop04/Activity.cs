@@ -22,7 +22,7 @@ public class Activity
 		_endMessage = "";
 	}
 	public void SetWelcomeMessage() {
-		_welcomeMessage = $"Welcome to the {_name} Activity"; 
+		_welcomeMessage = $"Welcome to the {_name} Activity."; 
 	}
 
 	public void SetStartMessage() {
@@ -34,7 +34,7 @@ public class Activity
 	}
 
 	public void SetEndMessage() {
-		_endMessage = $"{_congratulations}\n\n{_results}\n";
+		_endMessage = $"\n{_congratulations}\n\n{_results}\n";
 	}
 
 	public void SetDuration() {

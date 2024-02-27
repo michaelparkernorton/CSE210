@@ -44,10 +44,10 @@ public class Menu
 			Breathing activity = new();
 			return activity;
 		} else if (option == 2) {
-			Reflection activity = new();
+			Reflecting activity = new();
 			return activity;
 		} else if (option == 3) {
-			List activity = new();
+			Listing activity = new();
 			return activity;
 		}	else {
 			return null;
