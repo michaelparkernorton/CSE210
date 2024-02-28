@@ -34,7 +34,7 @@ public class Activity
 	}
 
 	public void SetEndMessage() {
-		_endMessage = $"\n{_congratulations}\n\n{_results}\n";
+		_endMessage = $"\n\n{_congratulations}\n\n{_results}\n";
 	}
 
 	public void SetDuration() {

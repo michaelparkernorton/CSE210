@@ -8,11 +8,13 @@ while (active) {
     m.DisplayMenu();
     m.ClearDisplay();
     Activity a = m.SelectActivity(m.Option);
-    if (m.Option == 4) {
-        break;
+    if (a != null) {
+        a.StartActivity();
+        m.ClearDisplay();
+        a.RunActivity();
+        a.EndActivity();
     }
-    a.StartActivity();
-    m.ClearDisplay();
-    a.RunActivity();
-    a.EndActivity();
+    if (m.Option == 4) {
+        active = false;
+    }
 }
