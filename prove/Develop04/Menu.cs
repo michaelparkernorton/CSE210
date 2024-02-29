@@ -1,22 +1,21 @@
 public class Menu
 {
-	private string[] _options = {"Start breathing activity", "Start reflecting activity", "Start listing activity", "Quit"};
 	private int _option;
-
 	public int Option
      {
          get { return _option; }
          set { _option = value; }
      }
-	public Menu () {
-		
-	}
+	public Menu () {}
 
-	public void ClearDisplay() {
+	static void ClearDisplay() {
 		Console.Clear();
 	}
 
 	public void DisplayMenu () {
+		string[] _options = {"Start breathing activity", "Start reflecting activity", "Start listing activity", "Quit"};
+
+		ClearDisplay();
 		Console.WriteLine("Menu Options:");
 		for (var i = 0; i < _options.Length; i++)
 		{
@@ -25,9 +24,8 @@ public class Menu
 		Console.Write("Select a choice from the menu: ");
 
 		var value = Console.ReadLine();
-		int number;
 
-		bool success = int.TryParse(value, out number);
+		bool success = int.TryParse(value, out int number);
 		if (success)
 		{
 			_option = number;
@@ -40,15 +38,13 @@ public class Menu
 	}
 
 	public Activity SelectActivity(int option) {
+		ClearDisplay();
 		if (option == 1) {
-			Breathing activity = new();
-			return activity;
+			return new Breathing();
 		} else if (option == 2) {
-			Reflecting activity = new();
-			return activity;
+			return new Reflecting();
 		} else if (option == 3) {
-			Listing activity = new();
-			return activity;
+			return new Listing();
 		}	else {
 			return null;
 		}
