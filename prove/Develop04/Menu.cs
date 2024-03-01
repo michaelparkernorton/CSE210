@@ -13,7 +13,7 @@ public class Menu
 	}
 
 	public void DisplayMenu () {
-		string[] _options = {"Start breathing activity", "Start reflecting activity", "Start listing activity", "Quit"};
+		string[] _options = {"Start breathing activity", "Start reflecting activity", "Start listing activity", "Start strength training activity", "Quit"};
 
 		ClearDisplay();
 		Console.WriteLine("Menu Options:");
@@ -45,6 +45,8 @@ public class Menu
 			return new Reflecting();
 		} else if (option == 3) {
 			return new Listing();
+		} else if (option == 4) {
+			return new StrengthTraining();
 		}	else {
 			return null;
 		}

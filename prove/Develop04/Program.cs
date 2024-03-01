@@ -14,7 +14,7 @@ while (active)
 		a.RunActivity();
 		a.EndActivity();
 	}
-	if (m.Option == 4)
+	if (m.Option == 5)
 	{
 		active = false;
 	}

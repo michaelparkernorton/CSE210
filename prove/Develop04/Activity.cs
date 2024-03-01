@@ -15,11 +15,7 @@ public class Activity
 		SetStartMessage();
 		Display(_startMessage);
 		SetDuration();
-		ClearDisplay();
-		Display("Get ready...");
-		NewLine();
-		Spinner();
-		Break();
+		GetReady();
 	}
 	public void SetStartMessage() {
 		SetWelcomeMessage();
@@ -43,6 +39,14 @@ public class Activity
 	}
 	public void SetWelcomeMessage() {
 		_welcomeMessage = $"Welcome to the {_name} Activity."; 
+	}
+
+	public static void GetReady() {
+		ClearDisplay();
+		Display("Get ready...");
+		NewLine();
+		Spinner();
+		Break();
 	}
 
 	// RUNNING AN ACTIVITY
@@ -111,7 +115,7 @@ public class Activity
 		foreach (var spinnerChar in _spinnerCharacters)
 		{
 			Display(spinnerChar);
-			Pause(1);
+			Pause(5);
 			RemoveCharacter();
 		}
 	}
