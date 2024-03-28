@@ -9,8 +9,8 @@ public class Comment
 		_text = text;
 	}
 
-	public void GetComment () {
-
+	public void DisplayComment () {
+		Console.WriteLine($"name: {_name}, text: {_text}");
 	}
 
 }
