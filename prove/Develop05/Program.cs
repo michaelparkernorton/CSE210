@@ -1,78 +1,167 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
 
-namespace Solution
+class Program
 {
-    
-    public class Note
+    static void Main(string[] args)
     {
-        public string name;
-        public string state;
+        // Create a new user
+        User user = new User("John");
 
-        public Note(string name, string state) {
-            this.name = name;
-            this.state = state;
+        // Load goals from file
+        LoadGoals(user);
+
+        bool exit = false;
+        while (!exit)
+        {
+            Console.WriteLine("\nMenu:");
+            Console.WriteLine("1. Create a new goal");
+            Console.WriteLine("2. List goals");
+            Console.WriteLine("3. Save goals");
+            Console.WriteLine("4. Load goals");
+            Console.WriteLine("5. Record an event");
+            Console.WriteLine("6. Quit");
+            Console.Write("Enter your choice: ");
+
+            string choice = Console.ReadLine();
+            Console.WriteLine();
+
+            switch (choice)
+            {
+                case "1":
+                    CreateGoal(user);
+                    break;
+                case "2":
+                    ListGoals(user);
+                    break;
+                case "3":
+                    SaveGoals(user);
+                    break;
+                case "4":
+                    LoadGoals(user);
+                    break;
+                case "5":
+                    RecordEvent(user);
+                    break;
+                case "6":
+                    exit = true;
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
+            }
         }
     }
-    
-    public class NotesStore
-    {
-        public List<Note> Notes;
-        public string[] note;
-        public NotesStore() {}
-        public void AddNote(String state, String name) {
-            if (name == String.Empty)
-            {
-                throw new Exception("Name cannot be empty");
-            }
-            if (state != "completed" || state != "active" || state != "others") {
-                throw new Exception($"Invalid state {state}");
-            }
-            Note n = new(name, state);
-            Notes.Add(n);
-        }
-        public List<String> GetNotes(String state) {
-            List<String> notes = new List<String>();
-            foreach (var note in this.Notes)
-            {
-                if (note.state == state){
-                    notes.Add(note.name);
-                }
-            }
-            return notes;
 
-        }
-    } 
-
-    public class Solution
+    static void CreateGoal(User user)
     {
-        public static void Main() 
+        Console.Write("Enter goal type (1. Simple, 2. Eternal, 3. Checklist): ");
+        string type = Console.ReadLine();
+        Console.Write("Enter goal name: ");
+        string name = Console.ReadLine();
+        Console.Write("Enter goal description: ");
+        string description = Console.ReadLine();
+
+        Console.Write("Enter number of points for the goal: ");
+        if (!int.TryParse(Console.ReadLine(), out int points))
         {
-            var notesStoreObj = new NotesStore();
-            var n = int.Parse(Console.ReadLine());
-            for (var i = 0; i < n; i++) {
-                var operationInfo = Console.ReadLine().Split(' ');
-                try
-                {
-                    if (operationInfo[0] == "AddNote")
-                        notesStoreObj.AddNote(operationInfo[1], operationInfo.Length == 2 ? "" : operationInfo[2]);
-                    else if (operationInfo[0] == "GetNotes")
+            Console.WriteLine("Invalid points value. Please enter a valid integer.");
+            return;
+        }
+
+        Goal goal;
+            switch (type)
+            {
+                case "1":
+                    goal = new SimpleGoal(name, points, description);
+                    break;
+                case "2":
+                    goal = new EternalGoal(name, points, description);
+                    break;
+                case "3":
+                    Console.Write("Enter target count for the checklist goal: ");
+                    if (!int.TryParse(Console.ReadLine(), out int targetCount))
                     {
-                        var result = notesStoreObj.GetNotes(operationInfo[1]);
-                        if (result.Count == 0)
-                            Console.WriteLine("No Notes");
-                        else
-                            Console.WriteLine(string.Join(",", result));
-                    } else {
-                        Console.WriteLine("Invalid Parameter");
+                        Console.WriteLine("Invalid target count. Please enter a valid integer.");
+                        return;
                     }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Error: " + e.Message);
-                }
+                    goal = new ChecklistGoal(name, points, description, targetCount);
+                    break;
+                default:
+                    Console.WriteLine("Invalid goal type.");
+                    return;
             }
+
+
+        user.AddGoal(goal);
+        Console.WriteLine("Goal created successfully.");
+    }
+
+    static void ListGoals(User user)
+    {
+        Console.WriteLine("\nUser's Goals:");
+        for (int i = 0; i < user.Goals.Count; i++)
+        {
+            Goal goal = user.Goals[i];
+            Console.WriteLine($"{i+1}: {goal.Name} ({goal.Description}) Complete: {goal.IsComplete}");
+        }
+    }
+
+    static void SaveGoals(User user)
+    {
+        try
+        {
+            string json = JsonSerializer.Serialize(user.Goals);
+            File.WriteAllText("goals.json", json);
+            Console.WriteLine("Goals saved successfully.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving goals: {ex.Message}");
+        }
+    }
+
+    static void LoadGoals(User user)
+    {
+        try
+        {
+            if (File.Exists("goals.dat"))
+            {
+                string json = File.ReadAllText("goals.dat");
+                user.Goals = JsonSerializer.Deserialize<List<Goal>>(json);
+                Console.WriteLine("Goals loaded successfully.");
+            }
+            else
+            {
+                Console.WriteLine("No saved goals found.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading goals: {ex.Message}");
+        }
+    }
+
+    static void RecordEvent(User user)
+    {
+        Console.WriteLine("Select a goal to record an event for:");
+        for (int i = 0; i < user.Goals.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {user.Goals[i].Name}");
+        }
+
+        Console.Write("Enter goal number: ");
+        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= user.Goals.Count)
+        {
+            user.RecordProgress(user.Goals[index - 1]);
+            Console.WriteLine("Event recorded successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid goal number.");
         }
     }
 }
