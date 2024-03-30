@@ -4,7 +4,7 @@ public class Video
 	private string _author;
   private int _length;
 
-	List<Comment> _comments;
+	List<Comment> _comments = new List<Comment>();
 
 	public Video (string title, string author, int length) {
 		_title = title;
@@ -20,12 +20,15 @@ public class Video
 		return _comments.Count;
 	}
 
-	public void DisplayVideo () {
-		Console.WriteLine($"title: {_title}, author: {_author}, length: {_length} seconds, number of comments: {this.CountComments()}");
+	public void DisplayVideo (int number) {
+		Console.WriteLine("====================================");
+		Console.WriteLine($"video: {number}\ntitle: {_title}\nauthor: {_author}\nlength: {_length} seconds\nnumber of comments: {this.CountComments()}");
+		int count = 1;
 		foreach (var comment in _comments)
 		{
-			comment.DisplayComment();
+			comment.DisplayComment(count++);
 		}
+		Console.WriteLine("====================================");
 	}
 
 }

@@ -24,6 +24,7 @@ video3.SaveComment(comment1);
 video3.SaveComment(comment2);
 video3.SaveComment(comment3);
 
-video1.DisplayVideo();
-video2.DisplayVideo();
-video3.DisplayVideo();
+Console.Clear();
+video1.DisplayVideo(1);
+video2.DisplayVideo(2);
+video3.DisplayVideo(3);
