@@ -1,28 +1,62 @@
-public class Order {
-	public List<StoreProduct> _storeProducts;
-	public Customer _customer;
+using System.Text;
 
-	public Order(List<StoreProduct> storeProducts, Customer customer)
-	{
-		_storeProducts = storeProducts;
-		_customer = customer;
-	}
+public class Order
+{
+    private Customer _customer;
+    private List<Product> _products;
 
-	public void GetOrder() {}
+    public Order(Customer customer)
+    {
+        _customer = customer;
+        _products = new List<Product>();
+    }
 
-	public void CreatePackingLabel() {}
-	public void CreateShippingLabel() {}
+    public void AddProduct(Product product)
+    {
+        _products.Add(product);
+    }
 
-	public double CalcTotalCost () {
-		double total = 0;
-		foreach (var storeProduct in _storeProducts)
-		{
-			total += storeProduct.CalcTotalCost();	
-		}
-		return total;
-	}
+    public double CalculateTotalCost()
+    {
+        double totalCost = 0;
+        foreach (var product in _products)
+        {
+            totalCost += product.GetTotalCost();
+        }
 
-	public double CalcShipping() {
-		return 0;
-	}
+        double shippingCost = _customer.IsUSACustomer() ? 5 : 35;
+        return totalCost + shippingCost;
+    }
+
+    public string GeneratePackingLabel()
+    {
+        StringBuilder label = new StringBuilder();
+        foreach (var product in _products)
+        {
+            label.Append($"{product.GetName()} (ID: {product.GetProductId()})\n");
+        }
+        return label.ToString();
+    }
+
+    public string GenerateShippingLabel()
+    {
+        return $"{_customer.GetName()}\n{_customer.GetAddress()}";
+    }
+
+		
+    public void DisplayLoadingOrderNotification()
+    {
+        Console.Write($"Loading order for {_customer.GetName()} ");
+    }
+
+		public void DisplayOrderInformation()
+    {
+        Console.WriteLine($"Order for {_customer.GetName()}:");
+        Console.WriteLine("Packing Label:");
+        Console.WriteLine(GeneratePackingLabel());
+        Console.WriteLine("\nShipping Label:");
+        Console.WriteLine(GenerateShippingLabel());
+        Console.WriteLine("\nTotal Price:");
+        Console.WriteLine("$" + CalculateTotalCost());
+    }
 }
