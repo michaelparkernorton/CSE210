@@ -12,7 +12,7 @@ class Program
         User user = new User("John");
 
         // Load goals from file
-        LoadGoals(user);
+        // LoadGoals(user);
 
         bool exit = false;
         while (!exit)
@@ -128,9 +128,9 @@ class Program
     {
         try
         {
-            if (File.Exists("goals.dat"))
+            if (File.Exists("goals.json"))
             {
-                string json = File.ReadAllText("goals.dat");
+                string json = File.ReadAllText("goals.json");
                 user.Goals = JsonSerializer.Deserialize<List<Goal>>(json);
                 Console.WriteLine("Goals loaded successfully.");
             }

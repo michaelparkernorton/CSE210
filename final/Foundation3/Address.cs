@@ -12,7 +12,10 @@ public class Address {
 		_country = country;
 	}
 
-	public void GetAddress () {}
+	public string GetAddress()
+{
+    return $"{_street}, {_city}, {_state}, {_country}";
+}
 
 	public bool IsInUs() {
 		if (_country == "US") {
