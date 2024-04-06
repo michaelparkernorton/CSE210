@@ -13,8 +13,4 @@ public class Running : Activity {
     public override double GetSpeed() {
         return _distance / (_duration / 60.0); // mph
     }
-
-    public override double GetPace() {
-        return (_duration / 60.0) / _distance; // minutes per mile
-    }
 }

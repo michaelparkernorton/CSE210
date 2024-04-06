@@ -13,14 +13,14 @@ public class Activity {
     }
 
     public virtual double GetSpeed() {
-        return 0;
+        return GetPace() / 60;
     }
 
     public virtual double GetPace() {
-        return 0;
+        return 60 / GetSpeed();
     }
 
     public void GetSummary() {
-        Console.WriteLine($"{_date} {GetType().Name} ({_duration} min) - Distance: {GetDistance()} miles, Speed: {GetSpeed()} mph, Pace: {GetPace()} min per mile");
+        Console.WriteLine($"{_date.ToString("dd MMM yyyy")} {GetType().Name} ({_duration} min) - Distance: {Math.Round(GetDistance(), 2)} miles, Speed: {Math.Round(GetSpeed(), 2)} mph, Pace: {Math.Round(GetPace(), 2)} min per mile");
     }
 }

@@ -6,6 +6,10 @@ public class Bicycling : Activity {
         _speed = speed;
     }
 
+    public override double GetDistance() {
+        return _speed * _duration / 60.0;
+    }
+
     public override double GetSpeed() {
         return _speed;
     }
